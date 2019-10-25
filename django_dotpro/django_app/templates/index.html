@@ -1,0 +1,30 @@
+
+<html>
+<body>
+    <div class="memo-form">
+      <h3>メモ内容</h3>
+      <form action="{% url 'post' %}" method="post">
+        {% csrf_token %}
+        <div class="text-memo">
+
+<!--            ？ここがうまくいってないからtextareaが表示されない。と思う-->
+          {{ form.content }}　
+        </div>
+
+        <div class="post-form">
+            <input type="submit" value="登録" class="post-botton">
+        </div>
+
+      </form>
+    </div>
+  <div class="top_box">
+    {% for memo in memos %}
+    <div>
+      <p>{{ memo.content }}</p>
+        <!--？　↓ここの記述わかってない-->
+      <p>{{ memo.update_datetime|date:"Y/m/d H:m:s" }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

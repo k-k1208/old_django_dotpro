@@ -7,7 +7,7 @@
         {% csrf_token %}
         <div class="text-memo">
 
-<!--            ？ここがうまくいってないからtextareaが表示されない。と思う-->
+<!--            ？ここがうまくいってないからtextareaが表示されない。と思う→その通り、-->
           {{ form.content }}　
         </div>
 
@@ -21,7 +21,7 @@
     {% for memo in memos %}
     <div>
       <p>{{ memo.content }}</p>
-        <!--？　↓ここの記述わかってない-->
+        <!--？　↓ここの記述わかってない→ポール"  |  " djangoフィルタという-->
       <p>{{ memo.update_datetime|date:"Y/m/d H:m:s" }}</p>
     </div>
     {% endfor %}

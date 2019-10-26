@@ -11,9 +11,10 @@ from .forms import PostForm
 def index(request):
     memos = Memo.objects.all()
     params = {
-        'memos': memos
+        'memos': memos,
+        'form': PostForm() #これが抜けていたためテキストエリアが表示されへんかった
       }
-    return render(request, 'index.html', params)#renderメソッドの第三引数に変数(辞書型)を入れることで、templateのhtmlファイルに使う変数を渡せる
+    return render(request, 'index.html', params)#renderメソッドの第三引数に変数(辞書型)を入れることで、templateのhtmlファイルに使う変数を渡せる、辞書に使う変数を全部格納してしまう
 
 
 def post(request):

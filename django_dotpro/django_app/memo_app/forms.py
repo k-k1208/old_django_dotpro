@@ -13,6 +13,11 @@ CHOICE_FIELD_RECODE_NUMBERS = (
     ('30', '30件'),
 )
 
+CHOICE_FIELD_SET_NUMBERS = (
+    ('new', '新着順'),
+    ('old', '古い順'),
+)
+
 class RecordNumberForm(forms.Form):
     record_number = forms.ChoiceField(
         widget=forms.Select(attrs={'onchange': 'submit(this.form)'}),#ここがわかっていない。onchangeイベントはユーザーの入力に合わせて動的に表示内容を変えられる。
@@ -21,6 +26,13 @@ class RecordNumberForm(forms.Form):
 
         choices=CHOICE_FIELD_RECODE_NUMBERS
     )
+
+class SetRecordForm(forms.Form):
+    record_order = forms.ChoiceField(
+        widget=forms.Select(attrs={'onchange': 'submit(this.form)'}),
+        choices=CHOICE_FIELD_SET_NUMBERS
+    )
+
 
 class PostForm(forms.ModelForm):#メタとは「〇〇な〇〇」を「メタ〇〇」という。
                                 # クラスのクラスだからメタクラスModelFormクラスを定義するクラスだからPostFormはメタクラス。

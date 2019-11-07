@@ -16,11 +16,20 @@
     </div>
 
 
-    <form action="{% url 'index' %}" method="post">
+    <form action="{% url 'set_record_number' %}" method="post">
         {% csrf_token %}
+<!--        表示件数-->
         <div class="slct01">
 <!--            ↓choicefieldになっている↓　　　　　　　　　　-->
             {{record_number_form.record_number}}
+        </div>
+    </form>
+    <form action="{% url 'set_order_option' %}" method="post">
+         {% csrf_token %}
+<!--        新・旧順番-->
+        <div class="slct02">
+            {{record_order_form.record_order}}
+
         </div>
     </form>
 

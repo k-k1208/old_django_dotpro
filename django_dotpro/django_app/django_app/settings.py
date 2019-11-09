@@ -106,4 +106,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+
+#cssなどの静的ファイルを扱うための設定。
+#動的ファイル→view,requestによってその都度表示が変わるシステム
+#静的ファイル→画像,css,JavaScript
+STATIC_URL = '/static/'#cssなどの静的ファイル配信用URL
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+#staticファイルのある場所を教えている。
+

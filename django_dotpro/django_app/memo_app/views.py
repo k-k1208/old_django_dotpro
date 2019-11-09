@@ -35,10 +35,13 @@ def index(request, now_page=1):
 
     # if 'record_order' in request.session:#？なんでここみたいにrecord_numberのとこはセッションにまだ何もない場合のためのif文を書かなくてもいいのか？
                                         #レコードの変更をしている場合＝セッションにrecord_orderが格納されている
-    if request.session['record_order'] =="new":
-        record_order = 'new'
-        memos = Memo.objects.all().order_by('update_datetime').reverse()#新しい順
-    else:
+    if 'record_order' in request.session:
+        record_order = request.session['record_order']
+        if record_order == 'new':
+            memos = Memo.objects.all().order_by('update_datetime').reverse()#新しい順
+        else:
+            memos = Memo.objects.all().order_by('update_datetime')
+    else:#デフォルトの設定
         record_order = 'old'
         memos = Memo.objects.all().order_by('update_datetime')  # 古い順
     # else:

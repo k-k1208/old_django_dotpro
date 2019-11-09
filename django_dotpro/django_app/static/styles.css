@@ -1,0 +1,55 @@
+@charset "UTF-8";
+body {
+	background: skyblue
+}
+p{
+	font-size: 80%
+}
+.item {
+	background: white;
+}
+
+.container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: space-around;
+
+}
+
+/*横表示（インライン）で表示する*/
+.choice {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: inline;
+}
+
+.left {border: solid#008080;
+	width: 49%;
+	height: 100%;
+	position: relative;
+
+}
+.right {border: solid#008080;
+	width: 49%;
+	height: 100%;
+	position: relative;
+}
+
+.post-button {
+	text-align: center;
+
+}
+
+textarea {
+	width: 300px;
+	height: 400px;
+
+	text-align: center;
+}
+
+.memo-box {
+	text-align: center;
+}

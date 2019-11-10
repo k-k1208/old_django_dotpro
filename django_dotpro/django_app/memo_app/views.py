@@ -21,7 +21,6 @@ def set_order_option(request):#formで作られたプルダウンフィールド
 def index(request, now_page=1):
 
 #表示件数の部分
-    print(request.session['record_order'])
     if 'record_number' in request.session:
         record_number = request.session['record_number']#でここではRecordNumberFormクラスのrecord_numberのchoiceを選択している
     else:#リクエストがないデフォルトの表示件数を10件にする。
@@ -44,9 +43,6 @@ def index(request, now_page=1):
     else:#デフォルトの設定
         record_order = 'old'
         memos = Memo.objects.all().order_by('update_datetime')  # 古い順
-    # else:
-    #     record_order = 'new'
-    #     memos = Memo.objects.all().order_by('update_datetime').reverse()  # 新しい順
 
     record_order_form = SetRecordForm() #form.py のクラスをインスタンス化→paramsに渡す
     record_order_form.initial = {'record_order': record_order}
@@ -75,4 +71,5 @@ def post(request):
     else:
         print(form.errors)
     return redirect(to='/')
+
 

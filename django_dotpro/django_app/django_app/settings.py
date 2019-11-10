@@ -25,7 +25,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'memo_app',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -116,4 +121,17 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
 #staticファイルのある場所を教えている。
+
+
+SITE_ID = 1
+
+LOGIN_URL = '/accounts/login/'
+
+LOGIN_REDIRECT_URL = '/'
+
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+ACCOUNT_LOGOUT_ON_GET = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

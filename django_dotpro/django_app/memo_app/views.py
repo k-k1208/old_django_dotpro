@@ -5,7 +5,7 @@ from .models import *
 
 from .forms import PostForm, RecordNumberForm, SetRecordForm
 from django.core.paginator import Paginator
-
+from django.contrib.auth import get_user_model#ユーザーごとの表示のため　Memo.object.all()~~も全てMemo.objects.filter(user=request.user)に帰る
 
 # Create your views here.
 
@@ -37,12 +37,12 @@ def index(request, now_page=1):
     if 'record_order' in request.session:
         record_order = request.session['record_order']
         if record_order == 'new':
-            memos = Memo.objects.all().order_by('update_datetime').reverse()#新しい順
+            memos = Memo.objects.filter(user=request.user).order_by('update_datetime').reverse()#新しい順
         else:
-            memos = Memo.objects.all().order_by('update_datetime')
+            memos = Memo.objects.filter(user=request.user).order_by('update_datetime')
     else:#デフォルトの設定
         record_order = 'old'
-        memos = Memo.objects.all().order_by('update_datetime')  # 古い順
+        memos = Memo.objects.filter(user=request.user).order_by('update_datetime')  # 古い順
 
     record_order_form = SetRecordForm() #form.py のクラスをインスタンス化→paramsに渡す
     record_order_form.initial = {'record_order': record_order}
@@ -67,7 +67,9 @@ def index(request, now_page=1):
 def post(request):
     form = PostForm(request.POST, instance=Memo())
     if form.is_valid(): #validateで検証という英単語だから、formの内容が有効かどうかを観察するためのis_valid
-        form.save() #formの保存
+        user = get_user_model().objects.get(id=request.user.id)#ユーザーごとの表示のため
+        memo = Memo(content=request.POST.get('content'), user=user)#ユーザーごとの表示のため
+        memo.save()#ユーザーごとの表示のため
     else:
         print(form.errors)
     return redirect(to='/')
